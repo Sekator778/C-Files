@@ -8,13 +8,18 @@ void ft_putnbr(int n) {
 }
 
 void print_grid() {
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
+    int i = 0, j;
+
+    while (i < 4) {
+        j = 0;
+        while (j < 4) {
             ft_putnbr(grid[i][j]);
             if (j < 3) {
                 write(1, " ", 1);
             }
+            j++;
         }
         write(1, "\n", 1);
+        i++;
     }
 }

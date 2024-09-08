@@ -15,13 +15,17 @@ extern int grid[4][4];
 // - 1 if the number can be placed
 // - 0 if the number already exists in the row or column
 int can_place_number(int row, int col, int num) {
-    for (int i = 0; i < 4; i++) {
+    int i = 0;
+
+    while (i < 4) {
         if (grid[row][i] == num || grid[i][col] == num) {
-            return 0;
+            return (0);
         }
+        i++;
     }
     return 1;
 }
+
 // Function solves the puzzle by placing numbers in the grid using recursion (backtracking)
 // Parameters:
 // - viewpoints: array of visibility values (views from top, bottom, left, right)
@@ -36,18 +40,23 @@ int solve(int *viewpoints, int row, int col) {
     }
     int next_row, next_col;
     get_next_position(row, col, &next_row, &next_col);
-    for (int num = 1; num <= 4; num++) {
+
+    int num = 1;
+    while (num <= 4) {
         if (can_place_number(row, col, num)) {
             grid[row][col] = num;
             if (!is_valid_placement(viewpoints, row, col)) {
                 grid[row][col] = 0;
+                num++;
                 continue;
             }
             if (solve(viewpoints, next_row, next_col)) {
                 return 1;
             }
         }
+        num++;
     }
+
     grid[row][col] = 0;
     return 0;
 }
