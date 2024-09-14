@@ -7,6 +7,8 @@ int ft_atoi(const char *str)
     // Skip whitespace characters
     while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
     {
+
+        
         str++;
     }
 

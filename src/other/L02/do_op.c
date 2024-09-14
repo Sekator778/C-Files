@@ -10,11 +10,11 @@ int main(int argc, char *argv[])
     }
 
     // Convert the first and third arguments to integers
-    int num1 = atoi(argv[1]);
-    int num2 = atoi(argv[3]);
+    int num1 = 123;
+    int num2 = 456;
 
     // Get the operation character
-    char operation = argv[2][0];
+    char operation = '*';
 
     // Perform the operation based on the given operator
     switch (operation)
