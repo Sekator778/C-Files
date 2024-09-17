@@ -1,43 +1,30 @@
-# Variables
 NAME = libft.a
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-SRCS_DIR = srcs
-INCLUDES_DIR = includes
-OBJS_DIR = $(SRCS_DIR)
 
-SRCS = ft_putchar.c ft_swap.c ft_putstr.c ft_strlen.c ft_strcmp.c
-OBJS = $(SRCS:.c=.o)
+PATH_SRC = ./srcs/
 
-SRCS_WITH_PATH = $(addprefix $(SRCS_DIR)/, $(SRCS))
-OBJS_WITH_PATH = $(addprefix $(OBJS_DIR)/, $(OBJS))
+HEADERS = ./includes
 
-# Default target
-all: $(NAME)
+SRCS = $(PATH_SRC)ft_putchar.c  $(PATH_SRC)ft_swap.c $(PATH_SRC)ft_putstr.c \
+    $(PATH_SRC)ft_strlen.c $(PATH_SRC)ft_strcmp.c
 
-# Build the library
-$(NAME): $(OBJS_WITH_PATH)
-	@echo "Creating library $(NAME)..."
-	ar rc $(NAME) $(OBJS_WITH_PATH)
-	ranlib $(NAME)
+OBJS =  ${SRCS:.c=.o}
 
-# Compile source files into object files
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(INCLUDES_DIR)/ft.h
-	@echo "Compiling $<..."
-	$(CC) $(CFLAGS) -c $< -o $@
+FLAGS = -Wall -Wextra -Werror
 
-# Remove object files
+all : $(NAME)
+
+.c.o :
+	gcc -c $(FLAGS) -I $(HEADERS) $< -o $(<:.c=.o)
+
+$(NAME) : ${OBJS}
+	ar rc $(NAME) $(OBJS)
+
 clean:
-	@echo "Cleaning object files..."
-	rm -f $(OBJS_WITH_PATH)
+	rm -f ${OBJS}
 
-# Remove object files and the library
-fclean: clean
-	@echo "Cleaning library $(NAME)..."
+fclean : clean
 	rm -f $(NAME)
 
-# Rebuild everything
-re: fclean all
+re : fclean all
 
-# Phony targets to prevent conflicts with file names
 .PHONY: all clean fclean re
