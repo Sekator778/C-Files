@@ -3,9 +3,7 @@
 
 int ft_strlen(char *src)
 {
-    int l;
-
-    l = 0;
+    int l = 0;
     while (src[l])
     {
         l++;
@@ -13,44 +11,63 @@ int ft_strlen(char *src)
     return (l);
 }
 
-char	*ft_strdup(char *src)
+char *ft_strdup(char *src)
 {
-	char	*dest;
-	int		i;
-	int		length;
+    char *dest;
+    int i;
+    int length;
 
     if (src == NULL)
-		return (NULL);
+        return (NULL);
 
-	i = 0;
-	length = ft_strlen(src) + 1;
-	dest = malloc(sizeof(char) * length);
-	if (dest == NULL)
-		return (dest);
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+    i = 0;
+    length = ft_strlen(src) + 1;
+    dest = malloc(sizeof(char) * length);
+    if (dest == NULL)
+        return (dest);
+
+    while (src[i] != '\0')
+    {
+        dest[i] = src[i];
+        i++;
+    }
+    dest[i] = '\0';
+
+    // Вивід для перевірки
+    printf("Source: '%s'\n", src);
+    printf("Destination: '%s'\n", dest);
+
+    return (dest);
 }
 
-int main(void)
+int main()
 {
-    char *s1 = "Hello";
-    printf("Before: %s\n", s1);
+    char *result;
 
-    char *s2 = ft_strdup(s1);
-    if (s2) // Check if strdup was successful
-    {
-        printf("After: %s\n", s2);
-        free(s2); // Free the allocated memory after use
-    }
-    else
-    {
-        printf("Memory allocation failed\n");
-    }
+    // Тест 1: Звичайний рядок
+    result = ft_strdup("hello");
+    printf("Test 1 Result: '%s'\n", result);
+    free(result);
+
+    // Тест 2: Рядок із символом нового рядка
+    result = ft_strdup("bienvenue\n");
+    printf("Test 2 Result: '%s'\n", result);
+    free(result);
+
+    // Тест 3: Порожній рядок
+    result = ft_strdup("");
+    printf("Test 3 Result: '%s'\n", result);
+    free(result);
+
+    // Тест 4: Рядок із кількома пробілами
+    result = ft_strdup("  42  ");
+    printf("Test 4 Result: '%s'\n", result);
+    free(result);
+
+    // Тест 5: Рядок з лише символом нового рядка
+    result = ft_strdup("\n");
+    printf("Test 5 Result: '%s'\n", result);
+    free(result);
 
     return 0;
 }
