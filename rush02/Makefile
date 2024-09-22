@@ -1,5 +1,7 @@
+# Makefile
+
 NAME = rush-02
-SRC = dict.c utils.c main.c
+SRC = main.c dict.c utils.c number_to_words.c
 OBJ = $(SRC:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
 

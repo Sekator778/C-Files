@@ -1,1 +1,0 @@
- gcc -Wall -Wextra -Werror -I../ex04 -o show_tab ../ex04/ft_strs_to_tab.c ft_show_tab.c main.c
